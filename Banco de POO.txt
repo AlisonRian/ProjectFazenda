@@ -1,0 +1,50 @@
+
+CREATE TABLE Fazenda (
+id INT,
+qtd_animais INT,
+nome TEXT,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Eventos (
+id SERIAL PRIMARY KEY,
+nome TEXT,
+data TEXT,
+local TEXT
+);
+
+
+CREATE TABLE Fornecedor (
+id INT PRIMARY KEY,
+id_fazenda INT,
+nome TEXT,
+contato VARCHAR(20),
+FOREIGN KEY (id_fazenda) REFERENCES Fazenda(id)
+);
+
+CREATE TABLE Veterinario (
+id INT PRIMARY KEY,
+id_fazenda INT,
+nome TEXT,
+contato VARCHAR(20),
+FOREIGN KEY (id_fazenda) REFERENCES Fazenda(id)
+);
+
+CREATE TABLE FazendaEventos (
+id_fazenda INT,
+id_evento INT,
+PRIMARY KEY (id_fazenda, id_evento),
+FOREIGN KEY (id_fazenda) REFERENCES Fazenda(id),
+FOREIGN KEY (id_evento) REFERENCES Eventos(id)
+);
+
+
+CREATE TABLE Caprinos(
+	id INT,
+	id_fazenda INT,
+	raca TEXT,
+	idade INT,
+	nome TEXT,
+	PRIMARY KEY(id),
+	FOREIGN KEY (id_fazenda) REFERENCES Fazenda(id)
+);
